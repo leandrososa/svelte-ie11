@@ -2,28 +2,45 @@
   "name": "svelte-app-ie11",
   "version": "1.0.0",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "start": "sirv public"
+    "watch:tailwind": "postcss src/tailwind.css -o public/index.css -w --jit",
+    "build:tailwind": "SET NODE_ENV=production && postcss src/tailwind.css -o public/index.css --jit",
+    "dev": "concurrently \"npm run autobuild\" \"npm run watch:tailwind\"",
+    "build": "npm run build:tailwind && rollup -c",
+    "autobuild": "rollup -c -w",
+    "start": "sirv public --single",
+    "start:dev": "sirv public --dev"
   },
   "devDependencies": {
-    "rollup": "^2.32.1",
-    "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-livereload": "^2.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-svelte": "^6.1.0",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "concurrently": "^7.0.0",
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.1.0",
+    "prettier": "^2.5.1",
+    "prettier-plugin-svelte": "^2.6.0",
+    "rollup": "^2.60.0",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-svelte": "^7.1.0",
     "rollup-plugin-terser": "^7.0.2",
-    "svelte": "^3.29.4"
+    "svelte": "^3.44.2",
+    "tailwindcss": "^1.9.6"
   },
   "dependencies": {
-    "@babel/core": "^7.12.3",
+    "@babel/core": "^7.16.0",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.12.1",
-    "@babel/preset-env": "^7.12.1",
-    "@babel/runtime": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.16.4",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/runtime": "^7.16.3",
+    "@fullhuman/postcss-purgecss": "^4.1.3",
+    "@rollup/plugin-babel": "^5.3.0",
     "core-js": "3",
+    "history": "^5.2.0",
     "rollup-plugin-babel": "^4.3.3",
-    "sirv-cli": "^1.0.8",
-    "whatwg-fetch": "^3.4.1"
+    "sirv-cli": "^1.0.14",
+    "svelte-navigator": "^3.1.5",
+    "svelte-preprocess": "^4.10.2",
+    "vconsole": "^3.11.2",
+    "whatwg-fetch": "^3.6.2"
   }
 }
